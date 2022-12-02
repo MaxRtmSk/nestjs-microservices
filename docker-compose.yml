@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: on-failure
+    container_name: postgres
+    hostname: database
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=master123
+      - POSTGRES_DB=postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: on-failure
+    container_name: rabbitmq
+    hostname: rabbitmq
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - ./rabbitmq.env
+
+volumes:
+  pg_data:
+    driver: local
+  rabbit_data:
+    driver: local

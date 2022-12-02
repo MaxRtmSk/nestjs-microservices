@@ -1,0 +1,24 @@
+{
+  "name": "nestjs-microservices",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "run-s install:auth",
+    "install:auth": "cd auth && npm i",
+    "run:auth:dev": "cd auth && npm run start:dev",
+    "run:auth:prod": "cd auth && npm run build && npm run start:prod",
+    "run:all:dev": "npm run kill && run-p run:auth:dev",
+    "run:all": "npm run kill && run-p run:auth",
+    "run:all:prod": "npm run kill && run-p run:auth:prod",
+    "kill": "kill-port --port 3001"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "kill-port": "^2.0.1"
+  }
+}
